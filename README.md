@@ -1,31 +1,31 @@
-Creating Py thon Project
+***Creating Py thon Project***
 
-Calculator – Basic operations (+, -, *, /).
+1. Calculator – Basic operations (+, -, *, /).
 
-To-Do List App – Add, edit, and delete tasks.
+2. To-Do List App – Add, edit, and delete tasks.
 
-Number Guessing Game – Computer selects a random number, user guesses.
+3. Number Guessing Game – Computer selects a random number, user guesses.
 
-Digital Clock – Display current time using tkinter.
+4. Digital Clock – Display current time using tkinter.
 
-Dice Roller Simulator – Random number between 1–6.
+5. Dice Roller Simulator – Random number between 1–6.
 
-Password Generator – Create random strong passwords.
+6. Password Generator – Create random strong passwords.
 
-Temperature Converter – Convert Celsius ↔ Fahrenheit.
+7. Temperature Converter – Convert Celsius ↔ Fahrenheit.
 
-Unit Converter – Length, weight, currency, etc.
+8. Unit Converter – Length, weight, currency, etc.
 
-Simple Chatbot – Responds with predefined answers.
+9. Simple Chatbot – Responds with predefined answers.
 
-Quiz Game – Ask questions, score the answers.
+10. Quiz Game – Ask questions, score the answers.
 
-BMI Calculator – Body Mass Index calculator.
+11. BMI Calculator – Body Mass Index calculator.
 
-Stopwatch/Timer – Start, stop, and reset timer.
+12. Stopwatch/Timer – Start, stop, and reset timer.
 
-Weather App – Fetch real-time weather (using API).
+13. Weather App – Fetch real-time weather (using API).
 
-Currency Converter – Exchange rate using an API.
+14. Currency Converter – Exchange rate using an API.
 
-Expense Tracker – Track daily spending.
+15. Expense Tracker – Track daily spending.
