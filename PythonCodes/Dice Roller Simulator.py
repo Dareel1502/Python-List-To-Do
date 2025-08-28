@@ -6,7 +6,6 @@ import tkinter as tk
 rolling_count = 0
 player_score = 0
 computer_score = 0
-
 def roll_dice():
        global rolling_count, player_score, computer_score
        if rolling_count > 0:
