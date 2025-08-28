@@ -1,4 +1,4 @@
-***Creating Py thon Project***
+***Creating Python Project***
 
 1. Calculator – Basic operations (+, -, *, /).
 
