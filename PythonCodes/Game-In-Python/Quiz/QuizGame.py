@@ -30,6 +30,8 @@ LIGHT_BLUE = (173, 216, 230)
 # Fonts
 font = pygame.font.SysFont(None, 36)
 title_font = pygame.font.SysFont(None, 48)
+big_title_font = pygame.font.SysFont(None, 60)   # for "IT'S QUIZ TIME"
+about_font = pygame.font.SysFont(None, 28)
 
 # Function to draw button
 def draw_button(rect, text, color, hover_color=None, text_color=WHITE):
@@ -56,6 +58,15 @@ quiz = [
     {"question": "Which is a fruit?", "options": ["Carrot", "Apple", "Lettuce", "Potato"], "answer": 1},
 ]
 
+# --- Shuffle options inside each question ---
+for q in quiz:
+    options = q["options"]
+    answer_index = q["answer"]
+    correct_answer = options[answer_index]
+
+    random.shuffle(options)  # shuffle order
+    q["answer"] = options.index(correct_answer)  # fix correct answer index
+
 # Option buttons
 option_buttons = [pygame.Rect(200, 150 + i*60, 500, 50) for i in range(4)]
 
@@ -66,6 +77,10 @@ quit_button = pygame.Rect(610, 500, 120, 50)
 play_button = pygame.Rect(340, 370, 120, 50)
 try_button = pygame.Rect(340, 400, 120, 50)
 
+# --- NEW buttons for About screen ---
+about_button = pygame.Rect(85, 500, 120, 50)
+about_back_button = pygame.Rect(340, 500, 120, 50)
+
 # Game variables
 game_started = False
 current_question = 0
@@ -73,6 +88,7 @@ score = 0
 quiz_over = False
 selected_option = None
 user_answers = [None]*len(quiz)
+show_about = False   # <--- NEW state
 
 # --- Load GIF for welcome screen (first frame only for now) ---
 welcome_gif = pygame.image.load(resource_path("gif_frames/frame_0.gif")).convert_alpha()
@@ -98,7 +114,7 @@ while running:
                 if quit_button.collidepoint(event.pos):
                     running = False
 
-            elif not game_started:
+            elif not game_started and not show_about:
                 if play_button.collidepoint(event.pos):
                     game_started = True
                     current_question = 0
@@ -107,6 +123,12 @@ while running:
                     random.shuffle(quiz)  # shuffle quiz
                 if quit_button.collidepoint(event.pos):
                     running = False
+                if about_button.collidepoint(event.pos):
+                    show_about = True   # go to about screen
+
+            elif show_about:
+                if about_back_button.collidepoint(event.pos):
+                    show_about = False  # back to main menu
 
             elif game_started:
                 # Option selection via circles
@@ -159,12 +181,34 @@ while running:
         draw_button(try_button, "Try Again", BLUE, LIGHT_BLUE)
         draw_button(quit_button, "QUIT", RED, LIGHT_BLUE)
 
-    elif not game_started:
+    elif not game_started and not show_about:
+        # Title text above GIF
+        title_text = big_title_font.render("IT'S QUIZ TIME", True, BLUE)
+        screen.blit(title_text, title_text.get_rect(center=(WIDTH//2, 80)))
+
         # Show welcome GIF (first frame)
         screen.blit(welcome_gif, (WIDTH//2 - 100, 150))
 
         draw_button(play_button, "PLAY", BLUE, LIGHT_BLUE, WHITE)
+        draw_button(about_button, "ABOUT", GREEN, LIGHT_BLUE, WHITE)
         draw_button(quit_button, "QUIT", RED , LIGHT_BLUE, WHITE)
+
+    elif show_about:
+        about_lines = [
+             "Welcome to the Quiz Game!",
+             "This game will test your knowledge with fun questions.",
+             "You’ll be given four options for each question.",
+             "Try to get at least 70% to pass the quiz.",
+             "Good luck and enjoy playing!",
+             "Developed by: Daryl Hans Ocao"
+        ]
+        y = 150
+        for line in about_lines:
+            text = about_font.render(line, True, BLACK)
+            screen.blit(text, (80, y))
+            y += 50
+
+        draw_button(about_back_button, "BACK", BLUE, LIGHT_BLUE, WHITE)
 
     elif game_started:
         # Display question
